@@ -1,3 +1,14 @@
+tarball:
+	mkdir bashshare-0.1
+	cp -rf src bashshare-0.1/src
+	cp Makefile bashshare-0.1
+	cp bash-share.spec bashshare-0.1
+	tar cvzf bashshare-0.1.tar.gz bashshare-0.1
+rpm: tarball
+	rpmbuild -ta bashshare-0.1.tar.gz
+clean:
+	rm -f bashshare-0.1.tar.gz
+	rm -rf bashshare-0.1
 install:
 	mkdir -p $(DESTDIR)/bin
 	cp src/share-smb $(DESTDIR)/bin/
