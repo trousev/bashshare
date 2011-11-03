@@ -1,19 +1,19 @@
 
 complete_share_ssh_passwordless()
 {
-    FILES=$(ls $HOME/.share/*\.passwordless-ssh | sed s/\\.passwordless-ssh//g | sed s/.*\\\///g 2> /dev/null)
+    FILES=$(ls $HOME/.share/*\.passwordless-ssh 2> /dev/null | sed s/\\.passwordless-ssh//g | sed s/.*\\\///g)
     local cur=${COMP_WORDS[COMP_CWORD]}
     COMPREPLY=( $(compgen -W "$FILES" -- $cur) )
 }
 complete_share_ssh()
 {
-    FILES=$(ls $HOME/.share/*\.ssh | sed s/\\.ssh//g | sed s/.*\\\///g 2> /dev/null)
+    FILES=$(ls $HOME/.share/*\.ssh 2> /dev/null | sed s/\\.ssh//g | sed s/.*\\\///g)
     local cur=${COMP_WORDS[COMP_CWORD]}
     COMPREPLY=( $(compgen -W "$FILES" -- $cur) )
 }
 complete_share_smb()
 {
-    FILES=$(ls $HOME/.share/*\.smb | sed s/\\.smb//g | sed s/.*\\\///g 2> /dev/null)
+    FILES=$(ls $HOME/.share/*\.smb 2> /dev/null | sed s/\\.smb//g | sed s/.*\\\///g)
     local cur=${COMP_WORDS[COMP_CWORD]}
     COMPREPLY=( $(compgen -W "$FILES" -- $cur) )
 }
