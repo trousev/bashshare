@@ -18,8 +18,8 @@ Collection of bash scripts, allowing quick mounting of network shares
 echo No build required
 
 %install
-rm -rf $RPM_BUILD_ROOT/usr
-make DESTDIR=$RPM_BUILD_ROOT/usr install
+rm -rf $RPM_BUILD_ROOT/
+make DESTDIR=$RPM_BUILD_ROOT install
 
 %clean
 rm -rf $RPM_BIULD_ROOT
