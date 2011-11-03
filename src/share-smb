@@ -1,0 +1,50 @@
+#!/bin/bash
+mkdir -p ~/.share
+mkdir -p ~/Share
+um=false
+if [ $1. == "-." ]; then
+  um=true
+  shift
+fi
+
+if [ $1. == . ]; then
+    echo Welcome to samba-share!
+    read -p "Samba server: " server
+    read -p "Username: " Uusername
+    stty -echo
+    read -p "Password: " Ppassword
+    stty echo;
+    if [ $Uusername%$Ppassword == % ]; then
+	smbclient -L $server
+    else
+	smbclient -L $server -U=$Uusername%$Ppassword
+    fi
+    read -p "Share name: " share_name
+    d_config=$server.$share
+    read -p "Local name ($d_config): " config
+    if [ $config. == . ]; then config=$d_config; fi
+    
+    echo type=cifs > ~/.share/$config
+    echo _USERNAME=$Uusername >> ~/.share/$config
+    echo _PASSWORD=$Ppassword >> ~/.share/$config
+    echo _HOSTNAME=//$server   >> ~/.share/$config
+    echo _SHARNAME=$share_name >> ~/.share/$config
+    echo _LOCALNAME=$config >> ~/.share/$config
+    
+    ln -s $config ~/.share/$config.smb 
+    
+    echo Share created
+else
+    if [ -f ~/.share/$1 ]; then
+      source ~/.share/$1
+      mkdir -p ~/Share/$_LOCALNAME
+      sudo umount -fl ~/Share/$_LOCALNAME 1> /dev/null 2> /dev/null
+      if [ $um != true ]; then
+        sudo mount -t $type $_HOSTNAME/$_SHARNAME ~/Share/$_LOCALNAME -o username=$_USERNAME,password=$_PASSWORD,uid=$(id -u),gid=$(id -g),user,codepage=cp1251,iocharset=utf8
+      fi
+    else
+      echo No config: $1
+      echo Aviable configurations:
+      for i in $(ls ~/.share/*.smb); do echo "   $i" | sed s!"$HOME/.share/"!!g | sed s!".smb"!!g; done
+    fi
+fi
