@@ -1,14 +1,15 @@
+version=0.2
 tarball:
-	mkdir bashshare-0.1
-	cp -rf src bashshare-0.1/src
-	cp Makefile bashshare-0.1
-	cp bash-share.spec bashshare-0.1
-	tar cvzf bashshare-0.1.tar.gz bashshare-0.1
+	mkdir bashshare-$(version)
+	cp -rf src bashshare-$(version)/src
+	cp Makefile bashshare-$(version)
+	cat bash-share-template.spec | sed s/{version}/$(version)/g > bashshare-$(version)/bash-share.spec
+	tar cvzf bashshare-$(version).tar.gz bashshare-$(version)
 rpm: tarball
-	rpmbuild -ta bashshare-0.1.tar.gz
+	rpmbuild -ta bashshare-$(version).tar.gz
 clean:
-	rm -f bashshare-0.1.tar.gz
-	rm -rf bashshare-0.1
+	rm -f bashshare-$(version).tar.gz
+	rm -rf bashshare-$(version)
 install:
 	mkdir -p $(DESTDIR)/usr/bin
 	cp src/share-smb $(DESTDIR)/usr/bin/

@@ -1,7 +1,7 @@
 Name: bashshare
-Version: 0.1
+Version: {version}
 Release: 1
-Source: bashshare-0.1.tar.gz
+Source: bashshare-{version}.tar.gz
 Vendor: Alexander Trousevich
 Summary: Collection of bash scripts, allowing quick mounting of network shares
 Group: admin/scripts
