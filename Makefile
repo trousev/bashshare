@@ -1,4 +1,4 @@
-version=0.3
+version=0.4.3
 all: help
 tarball:
 	rm -rf bashshare-$(version)
