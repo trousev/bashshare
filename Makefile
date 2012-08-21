@@ -35,6 +35,12 @@ uninstall:
 	rm $(DESTDIR)/usr/bin/SSH
 	rm $(DESTDIR)/usr/bin/SMB
 	rm $(DESTDIR)/usr/bin/SSHP
+version: rpm deb
+	cd output && rm -rf $(version)
+	cd output && cp -rf noarch $(version)
+	cd output && cp *.src.rpm $(version)
+	cd output && cp *.tar.gz $(version)
+push: version
+	cd output && rsync -r -e ssh $(version) trousev@frs.sourceforge.net:/home/frs/project/bashshare/
 help:
 	echo "This is no help here"
-
