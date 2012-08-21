@@ -1,15 +1,18 @@
-version=0.2
+version=0.3
+all: help
 tarball:
-	mkdir bashshare-$(version)
-	cp -rf src bashshare-$(version)/src
-	cp Makefile bashshare-$(version)
-	cat bash-share-template.spec | sed s/{version}/$(version)/g > bashshare-$(version)/bash-share.spec
-	tar cvzf bashshare-$(version).tar.gz bashshare-$(version)
-rpm: tarball
-	rpmbuild -ta bashshare-$(version).tar.gz
-clean:
-	rm -f bashshare-$(version).tar.gz
 	rm -rf bashshare-$(version)
+	mkdir -p output/bashshare-$(version)
+	cp -rf src output/bashshare-$(version)/src
+	cp Makefile output/bashshare-$(version)
+	cat bash-share-template.spec | sed s/{version}/$(version)/g > output/bashshare-$(version)/bash-share.spec
+	cd output && tar cvzf bashshare-$(version).tar.gz bashshare-$(version)
+rpm: tarball
+	cd output && rpmbuild --define "_sourcedir ." --define "_rpmdir ." --define "_buildir ." --define "_srcrpmdir ." --define "_speccdir ." -ta bashshare-$(version).tar.gz
+deb: rpm
+	cd output/noarch && fakeroot -- alien *.rpm
+clean:
+	rm -rf output
 install:
 	mkdir -p $(DESTDIR)/usr/bin
 	cp src/share-smb $(DESTDIR)/usr/bin/
@@ -32,4 +35,6 @@ uninstall:
 	rm $(DESTDIR)/usr/bin/SSH
 	rm $(DESTDIR)/usr/bin/SMB
 	rm $(DESTDIR)/usr/bin/SSHP
-all: install
+help:
+	echo "This is no help here"
+

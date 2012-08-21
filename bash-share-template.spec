@@ -7,6 +7,7 @@ Summary: Collection of bash scripts, allowing quick mounting of network shares
 Group: admin/scripts
 License: GNU GPL
 BuildRoot: %{_tmppath}/BUILDROOT
+BuildArch: noarch
 
 %description
 Collection of bash scripts, allowing quick mounting of network shares
