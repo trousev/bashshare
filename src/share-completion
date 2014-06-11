@@ -1,0 +1,7 @@
+bashshare_completion()
+{
+    FILES=$(share list)
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=( $(compgen -W "$FILES" -- $cur) )
+}
+complete -F bashshare_completion share
