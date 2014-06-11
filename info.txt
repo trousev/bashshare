@@ -1,0 +1,45 @@
+driver/init.sh: initscript, called always. Should devine BS_VARS variable with a list of all required variables
+
+driver/master.sh: should interact with user and prompt for all nesessary vars and set them
+driver/mount.sh <mountpoint>: should mount share to mountpoint, assuming that all vars are inited
+driver/umount.sh <mountpoint>: should unmount share
+
+
+IO
+==
+
+*init.sh*.
+    Input: None.
+    Output: BS_VARS variable which should contain any other script vars
+    Also may define suffixed variables. For example, if BS_VARS contains BS_PASSWORD, you may define BS_PASSWORD_TYPE="password"
+    Here is a list of suffixes:
+        TYPE={"password","text"},
+        DEFAULT="default value"
+        CAPTION = "field caption"
+
+*master.sh*
+    Input: BS_VARS
+    Output: Populated BS_VARS variables
+
+*mount.sh*
+    Input:
+        Populated BS_VARS array.
+        BS_OUTPUT variable which should contain empty mountpoint.
+        BS_SU should represent current su method
+    Output: Nothing. Should exit non-zero if something failed
+
+*umount.sh*
+    Input: same as in mount.sh
+    Output: Nothing. Should exit non-zero if something failed
+
+
+SETTINGS
+========
+
+write.sh, read.sh
+    Input:
+        BS_VARS -- list of variables to write
+        BS_NAME -- list of named warehouse
+
+read.sh should read variables from that wh
+write.sh should write them
