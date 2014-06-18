@@ -40,6 +40,8 @@ elif [ "$1" == "umount" ]; then
         done
     else
         bash $BS_ROOT/mount_share.sh - $1
+        mountpoint $BS_PREFIX/$1 1> /dev/null 2> /dev/null && echo "Umount of $1 failed"
+        mountpoint $BS_PREFIX/$1 1> /dev/null 2> /dev/null || rmdir $BS_PREFIX/$1 2> /dev/null
     fi
 elif [ "$1" == "list" ]; then
     for BS_NAME in $(bash $BS_ROOT/$BS_STORAGE/list.sh); do
@@ -54,7 +56,15 @@ elif [ "$1" == "list" ]; then
 elif [ "$1" == ".sys-list" ]; then
     bash $BS_ROOT/$BS_STORAGE/list.sh
 elif [ "$1" == "delete" ]; then
-    echo "Not implemented yet!"
+    shift
+    if [ "$1" == "" ]; then
+        echo "Specify share name, please"
+        exit 1
+    fi
+    mountpoint $BS_PREFIX/$1 1> /dev/null 2> /dev/null && echo "You must umount share before removing"
+    mountpoint $BS_PREFIX/$1 1> /dev/null 2> /dev/null && exit 1
+    export BS_NAME=$1
+    source $BS_ROOT/$BS_STORAGE/remove.sh
 else
     help
 fi

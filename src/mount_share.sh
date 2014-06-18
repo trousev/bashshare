@@ -14,3 +14,4 @@ export BS_OUTPUT=$BS_PREFIX/$BS_NAME
 source $BS_ROOT/$BS_STORAGE/read.sh
 source $BS_ROOT/$BS_TYPE/init.sh
 source $BS_ROOT/$BS_TYPE/$command.sh
+exit 0

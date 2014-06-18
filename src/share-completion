@@ -10,7 +10,7 @@ bashshare_completion()
     elif [ "${COMP_WORDS[1]}" == "create" ]; then
         FILES=""
     elif [ "${COMP_WORDS[1]}" == "delete" ]; then
-        FILES=""
+        FILES="$(share .sys-list)"
     elif [ "${COMP_WORDS[1]}" == "list" ]; then
         FILES=""
     fi
