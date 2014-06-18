@@ -26,7 +26,7 @@ for varname in $BS_VARS; do
         fi
         rflags=""
         if [ "${!vartype}" == "password" ]; then
-            rflags = " -s "
+            rflags=" -s "
         fi
         echo -en ": "
         read $rflags $varname
