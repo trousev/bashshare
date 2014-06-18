@@ -44,6 +44,7 @@ elif [ "$1" == "umount" ]; then
 elif [ "$1" == "list" ]; then
     for BS_NAME in $(bash $BS_ROOT/$BS_STORAGE/list.sh); do
         source $BS_ROOT/$BS_STORAGE/read.sh
+        source $BS_ROOT/$BS_TYPE/init.sh
         echo -en "\\r                                $BS_TYPE://$BS_USER@$BS_HOST:$BS_FOLDER"
         echo -en "\\r               $BS_NAME "
         echo -en "\\r[not mounted]"
