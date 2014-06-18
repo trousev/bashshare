@@ -1,0 +1,39 @@
+#!/bin/bash -e
+
+if [ -f $(dirname $0)/init.sh ]; then
+  source $(dirname $0)/init.sh $(dirname $0)
+elif [ -f /usr/share/bashshare/init.sh ]; then
+  source /usr/share/bashshare/init.sh /usr/share/bashshare
+else
+  echo "Can't find bash-share script location"
+  exit 1
+fi
+
+
+function help
+{
+    echo "USAGE: "
+    echo "    $0 create                 to create new share"
+    echo "    $0 mount  <share name>    to mount existing share"
+    echo "    $0 umount <share name>    to umount existing share"
+    echo "    $0 list                   to list existing shares"
+    echo "    $0 delete <share name>    to remove existing share"
+}
+
+if [ "$1" == "create" ]; then
+    bash $BS_ROOT/create_share.sh
+    exit 0
+elif [ "$1" == "mount" ]; then
+    shift
+    bash $BS_ROOT/mount_share.sh $1
+elif [ "$1" == "umount" ]; then
+    shift
+    bash $BS_ROOT/mount_share.sh - $1
+elif [ "$1" == "list" ]; then
+    bash $BS_ROOT/$BS_STORAGE/list.sh
+elif [ "$1" == "delete" ]; then
+    echo "Not implemented yet!"
+else
+    help
+fi
+

@@ -1,5 +1,5 @@
 #!/bin/bash -e
-source $(dirname $0)/init.sh
+source $(dirname $0)/init.sh $(dirname $0)
 
 # hack
 PS3='Please, select driver version: '

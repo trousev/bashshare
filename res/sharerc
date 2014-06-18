@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# This is representation of su command
+# export BS_SU=sudo
+
+
+# This is a storage type. Default is 'plain' but You may use gpg
+# You should configure BS_GPG_EMAIL variable if You want to use gpg
+# export BS_STORAGE=plain
+
+# This is a location where mountpoints will be stored.
+# Default is ~/Share. You may change it any moment.
+# export BS_PREFIX=~/Share
