@@ -2,7 +2,7 @@
 mkdir -p ~/.share/gpg
 CONF_FILE=~/.share/gpg/$BS_NAME.conf
 if [ -f $CONF_FILE ]; then
-    gpg --decrypt $CONF_FILE > ~/.share/gpg/dec.tmp
+    gpg --decrypt --quiet $CONF_FILE > ~/.share/gpg/dec.tmp
     source ~/.share/gpg/dec.tmp
     rm ~/.share/gpg/dec.tmp
 else

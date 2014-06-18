@@ -4,14 +4,19 @@ bashshare_completion()
     # echo ${COMP_WORDS[1]}
     FILES="none"
     if [ "${COMP_WORDS[1]}" == "mount" ]; then
-        FILES=$(share list)
+        FILES=$(share .sys-list)
     elif [ "${COMP_WORDS[1]}" == "umount" ]; then
-        FILES=$(share list)
+        FILES="$(share .sys-list) all"
+    elif [ "${COMP_WORDS[1]}" == "create" ]; then
+        FILES=""
+    elif [ "${COMP_WORDS[1]}" == "delete" ]; then
+        FILES=""
     elif [ "${COMP_WORDS[1]}" == "list" ]; then
         FILES=""
     fi
+
     if [ "$FILES" == "none" ]; then
-        FILES="mount umount list"
+        FILES="mount umount list create delete"
     fi
 
 

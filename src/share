@@ -25,11 +25,32 @@ if [ "$1" == "create" ]; then
     exit 0
 elif [ "$1" == "mount" ]; then
     shift
-    bash $BS_ROOT/mount_share.sh $1
+    if [ "$1" == "all" ]; then
+        for BS_NAME in $(share .sys-list); do
+            mountpoint $BS_PREFIX/$BS_NAME 1> /dev/null 2> /dev/null || share mount $BS_NAME
+        done
+    else
+        bash $BS_ROOT/mount_share.sh $1
+    fi
 elif [ "$1" == "umount" ]; then
     shift
-    bash $BS_ROOT/mount_share.sh - $1
+    if [ "$1" == "all" ]; then
+        for BS_NAME in $(share .sys-list); do
+            mountpoint $BS_PREFIX/$BS_NAME 1> /dev/null 2> /dev/null && share umount $BS_NAME
+        done
+    else
+        bash $BS_ROOT/mount_share.sh - $1
+    fi
 elif [ "$1" == "list" ]; then
+    for BS_NAME in $(bash $BS_ROOT/$BS_STORAGE/list.sh); do
+        source $BS_ROOT/$BS_STORAGE/read.sh
+        echo -en "\\r                                $BS_TYPE://$BS_USER@$BS_HOST:$BS_FOLDER"
+        echo -en "\\r               $BS_NAME "
+        echo -en "\\r[not mounted]"
+        mountpoint $BS_PREFIX/$BS_NAME 1> /dev/null 2> /dev/null && echo -en "\\r[  mounted  ]"
+        echo -en "\\n"
+    done
+elif [ "$1" == ".sys-list" ]; then
     bash $BS_ROOT/$BS_STORAGE/list.sh
 elif [ "$1" == "delete" ]; then
     echo "Not implemented yet!"
