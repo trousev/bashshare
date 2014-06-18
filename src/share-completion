@@ -1,6 +1,20 @@
 bashshare_completion()
 {
-    FILES=$(share list)
+
+    # echo ${COMP_WORDS[1]}
+    FILES="none"
+    if [ "${COMP_WORDS[1]}" == "mount" ]; then
+        FILES=$(share list)
+    elif [ "${COMP_WORDS[1]}" == "umount" ]; then
+        FILES=$(share list)
+    elif [ "${COMP_WORDS[1]}" == "list" ]; then
+        FILES=""
+    fi
+    if [ "$FILES" == "none" ]; then
+        FILES="mount umount list"
+    fi
+
+
     local cur=${COMP_WORDS[COMP_CWORD]}
     COMPREPLY=( $(compgen -W "$FILES" -- $cur) )
 }

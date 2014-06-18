@@ -2,8 +2,8 @@ Package: bashshare
 Version: {VERSION}-1
 Section: base
 Priority: optional
-Architecture: i386
-Depends: bash (>= 4)
+Architecture: all
+Depends: bash (>= 4),smbclient,sshfs
 Maintainer: Alexander Trousevich <trousev@yandex.ru>
 Description: Command line tools to mount remote filesystems painlessly
  When You need to mount a remote filesystem (ssh, smb, dav, etc) just

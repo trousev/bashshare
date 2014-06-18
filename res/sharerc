@@ -1,8 +1,9 @@
 #!/bin/bash
+# This is configuration file for bashshare package
+# Copy it into ~/.sharers if You want to customize user experience
 
 # This is representation of su command
 # export BS_SU=sudo
-
 
 # This is a storage type. Default is 'plain' but You may use gpg
 # You should configure BS_GPG_EMAIL variable if You want to use gpg
