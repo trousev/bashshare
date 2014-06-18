@@ -6,7 +6,9 @@
 
 # This is a storage type. Default is 'plain' but You may use gpg
 # You should configure BS_GPG_EMAIL variable if You want to use gpg
+# This can be: plain, gpg
 # export BS_STORAGE=plain
+# export BS_GPG_EMAIL=you@example.com
 
 # This is a location where mountpoints will be stored.
 # Default is ~/Share. You may change it any moment.
