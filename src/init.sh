@@ -5,7 +5,7 @@ else
     export BS_ROOT=$1
 fi
 
-export BS_DRIVERS="ssh smb dav owncloud encfs"
+export BS_DRIVERS="ssh smb dav owncloud encfs ftp"
 
 if [ -f /etc/sharerc ]; then
   source /etc/sharerc
