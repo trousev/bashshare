@@ -3,7 +3,7 @@ Version: {VERSION}-1
 Section: base
 Priority: optional
 Architecture: all
-Depends: bash (>= 4),smbclient,sshfs
+Depends: bash (>= 4)
 Maintainer: Alexander Trousevich <trousev@yandex.ru>
 Description: Command line tools to mount remote filesystems painlessly
  When You need to mount a remote filesystem (ssh, smb, dav, etc) just
